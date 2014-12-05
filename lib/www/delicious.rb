@@ -500,7 +500,7 @@ module WWW #:nodoc:
       # Initializes the HTTP client.
       # It automatically enable +use_ssl+ flag according to +@base_uri+ scheme.
       def init_http_client(options)
-        http = Net::HTTP.new(@base_uri.host, 443)
+        http = Net::HTTP.new(@base_uri.host, 443, options[:proxy_addr], options[:proxy_port])
         http.use_ssl = true if @base_uri.scheme == "https"
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE # FIXME: not 100% supported
         self.http_client = http
